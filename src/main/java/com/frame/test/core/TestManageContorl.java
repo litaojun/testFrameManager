@@ -1,0 +1,130 @@
+package com.frame.test.core;
+
+import java.io.IOException;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.frame.test.util.AnnotationFilterClass;
+import com.frame.test.util.ClassUtils;
+import com.frame.test.util.IfsPreDeal;
+import com.frame.test.util.PreResultDeal;
+import com.frame.test.util.TestCaseManagr;
+
+
+public class TestManageContorl 
+{
+    public static Map<String,MethodContext> interfacemethod = null;
+    public static Map<String,MethodContext> resultmethod  = null;
+    public static TestCaseManagr tsmanager = null;
+	 public TestManageContorl() throws ClassNotFoundException, IOException
+	 {
+		 if(tsmanager==null)
+		 {
+			 tsmanager = new TestCaseManagr();
+			 tsmanager.addTestCase("D:\\litaojun\\测试用例\\测试用例.xlsx","useradd",13);
+		 }
+		 TestManageContorl.init();
+	 }
+	 public static TestCaseManagr getTestCaseManagr()
+	 {
+		 return tsmanager;
+	 }
+	 public static void init() throws ClassNotFoundException, IOException
+	 {
+		 if(TestManageContorl.interfacemethod == null)
+		 {
+			 TestManageContorl.interfacemethod = new HashMap<String,MethodContext>();
+			 initInterfacemethod();
+		 }
+		 if(TestManageContorl.resultmethod == null)
+		 {
+			 TestManageContorl.resultmethod = new HashMap<String,MethodContext>();
+			 initResultmethod();
+		 }
+	 }
+	 public static Map<String,MethodContext> getInterfacemethod() throws ClassNotFoundException, IOException
+	 {
+		 if(interfacemethod==null)
+			 TestManageContorl.init();
+		 return interfacemethod;
+	 }
+	 public static Map<String,MethodContext> getResultmethod() throws ClassNotFoundException, IOException
+	 {
+		 if(resultmethod==null)
+			 TestManageContorl.init();
+		 return resultmethod;
+	 }
+
+     public static void initInterfacemethod() throws ClassNotFoundException, IOException
+     {
+    	 ArrayList<Class>  x = ClassUtils.filterClassByKey("Tran","com.didispace.test");
+    	 System.out.println("xxx="+x.size());
+//    	 for(Class s : x)
+//    		 System.out.println(s.getName());
+    	 ArrayList<Method> als = AnnotationFilterClass.filterMethodListByAnnotation( x, IfsPreDeal.class);
+    	 for(Method md:als)
+    	 {
+    		Annotation[] ans =  md.getAnnotations();
+    		for(Annotation an:ans)
+    		{
+    			if(an instanceof IfsPreDeal)
+    			{
+    				IfsPreDeal tcs = (IfsPreDeal) an;
+    				putInterfacemethod(tcs,md);
+    				break;
+    			}
+    		}
+    		 System.out.println(md.getName());
+    	 }
+
+     }
+     public static void putInterfacemethod(IfsPreDeal tc,Method md)
+     {
+    	// System.out.println("putInterfacemethod="+md.getName()+"--class--"+md.getDeclaringClass());
+    	 String ifname = tc.infname();
+    	 MethodContext curmactch = new MethodContext(md);
+    	 interfacemethod.put(ifname, curmactch);
+//    	 if(interfacemethod.containsKey(ifname))
+//    	 {
+//    	 }
+//    	 else
+//    	 {
+//    		 interfacemethod.put(ifname, curmactch);
+//    	 }
+     }
+     
+     public static void initResultmethod() throws ClassNotFoundException, IOException
+     {
+    	 ArrayList<Class>  x = ClassUtils.filterClassByKey("ResultMatch","com.didispace.test");
+    	// System.out.println("xxx="+x.size());
+//    	 for(Class s : x)
+//    		 System.out.println(s.getName());
+    	 ArrayList<Method> als = AnnotationFilterClass.filterMethodListByAnnotation( x, PreResultDeal.class);
+    	 for(Method md:als)
+    	 {
+    		Annotation[] ans =  md.getAnnotations();
+    		for(Annotation an:ans)
+    		{
+    			if(an instanceof PreResultDeal)
+    			{
+    				PreResultDeal tcs = (PreResultDeal) an;
+    				putResultComparemethod(tcs,md);
+    				break;
+    			}
+    		}
+    		 System.out.println(md.getName());
+    	 }
+
+     }
+     public static void putResultComparemethod(PreResultDeal tc,Method md)
+     {
+    	// System.out.println("putResultComparemethod="+md.getName()+"--class--"+md.getDeclaringClass());
+    	 String ifname = tc.infname();
+    	 MethodContext curmactch = new MethodContext(md);
+    	 resultmethod.put(ifname, curmactch);
+     }
+     
+}
