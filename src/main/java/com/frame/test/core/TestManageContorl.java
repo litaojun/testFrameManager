@@ -60,7 +60,7 @@ public class TestManageContorl
 
      public static void initInterfacemethod() throws ClassNotFoundException, IOException
      {
-    	 ArrayList<Class>  x = ClassUtils.filterClassByKey("Tran","com.didispace.test");
+    	 ArrayList<Class>  x = ClassUtils.filterClassByKey("Tran","com.frame.test");
     	 System.out.println("xxx="+x.size());
 //    	 for(Class s : x)
 //    		 System.out.println(s.getName());
@@ -98,7 +98,7 @@ public class TestManageContorl
      
      public static void initResultmethod() throws ClassNotFoundException, IOException
      {
-    	 ArrayList<Class>  x = ClassUtils.filterClassByKey("ResultMatch","com.didispace.test");
+    	 ArrayList<Class>  x = ClassUtils.filterClassByKey("ResultMatch","com.frame.test");
     	// System.out.println("xxx="+x.size());
 //    	 for(Class s : x)
 //    		 System.out.println(s.getName());
