@@ -10,6 +10,7 @@ import java.util.List;
 public class TestCaseManagr {
 	//private TestCaseStyle[] caseList =null;
 	private ArrayList<String[]> caseidlist = new ArrayList<String[]>();
+	private HashMap<String,ArrayList<String[]>> casehashmap = new HashMap<String,ArrayList<String[]>>();
 	private HashMap<String,List<TestCaseStyle>> curmap = new HashMap<String,List<TestCaseStyle>>();
 	
 	public HashMap<String,List<TestCaseStyle>> getCurmap()
@@ -35,6 +36,10 @@ public class TestCaseManagr {
 	{
 		return this.caseidlist;
 	}
+	public HashMap<String,ArrayList<String[]>> getCasehashmap()
+	{
+		return this.casehashmap;
+	}
 	
 	public void addTestCase(String path,String weet,int row) throws IOException
 	{
@@ -47,10 +52,26 @@ public class TestCaseManagr {
 			//System.out.println("i=========================="+i);
 			caseList[i]=new TestCaseStyle(b[i]);
 			caseidlist.add(new String[]{caseList[i].getCaseid(),caseList[i].getFunctionPoint()});
+			this.addDataToCasehashmap(new String[]{caseList[i].getCaseid(),caseList[i].getFunctionPoint()});
+			
 			curList.add(caseList[i]);
 			//System.out.println(caseList[i].toString());
 		}
 		curmap.put(weet, curList);
+	}
+	public void addDataToCasehashmap(String[] tm)
+	{
+		if(this.casehashmap.containsKey(tm[1]))
+		{
+			ArrayList<String[]> tal = this.casehashmap.get(tm[1]);
+			tal.add(tm);
+		}
+		else
+		{
+			ArrayList<String[]> tal =new ArrayList<String[]>();
+			tal.add(tm);
+			this.casehashmap.put(tm[1], tal);
+		}
 	}
 	public String getCaseInputData(String infname,String caseid)
 	{

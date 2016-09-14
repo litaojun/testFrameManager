@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.frame.test.thread.TestResultData;
 import com.frame.test.util.AnnotationFilterClass;
 import com.frame.test.util.ClassUtils;
 import com.frame.test.util.IfsPreDeal;
@@ -19,6 +20,7 @@ public class TestManageContorl
     public static Map<String,MethodContext> interfacemethod = null;
     public static Map<String,MethodContext> resultmethod  = null;
     public static TestCaseManagr tsmanager = null;
+    public static TestResultData trdata = null;
 	 public TestManageContorl() throws ClassNotFoundException, IOException
 	 {
 		 if(tsmanager==null)
@@ -26,10 +28,15 @@ public class TestManageContorl
 			 tsmanager = new TestCaseManagr();
 			 tsmanager.addTestCase("D:\\litaojun\\测试用例\\测试用例.xlsx","useradd",13);
 		 }
+		 if(trdata == null)
+		 {
+			 trdata = new TestResultData();
+		 }
 		 TestManageContorl.init();
 	 }
 	 public static TestCaseManagr getTestCaseManagr()
 	 {
+
 		 return tsmanager;
 	 }
 	 public static void init() throws ClassNotFoundException, IOException

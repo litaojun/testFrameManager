@@ -31,6 +31,10 @@ public class TestCaseStyle
     	return this.retData;
     }
 
+    public String getTestResult()
+    {
+    	return this.testResult;
+    }
     public void setExpectedResult(String expectrst)
     {
     	this.expectedResult = expectrst;

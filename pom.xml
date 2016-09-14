@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.example</groupId>
-	<artifactId>demo</artifactId>
+	<groupId>com.frame</groupId>
+	<artifactId>framemanager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
@@ -95,16 +95,32 @@
             <artifactId>poi-excelant</artifactId>  
             <version>3.14</version>  
         </dependency>
+        <dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>1.4.7</version>
+		</dependency>
+		<dependency>
+		    <groupId>javax.activation</groupId>
+		    <artifactId>activation</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+  <build>
+    <finalName>testframemanager</finalName>
+  </build>
 
+  <distributionManagement>
+        <repository>
+            <id>bestv-cloud-release</id>
+            <name>user release resp</name>
+            <url>http://54.199.223.146:19966/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>bestv-cloud-snapshot</id>
+            <url>http://54.199.223.146:19966/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>

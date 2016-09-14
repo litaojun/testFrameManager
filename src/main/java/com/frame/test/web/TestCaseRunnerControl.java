@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.frame.test.core.MethodContext;
 import com.frame.test.core.TestManageContorl;
+import com.frame.test.thread.StatisticsResultThread;
+import com.frame.test.thread.TestResultData;
 import com.frame.test.util.HttpRequest;
 import com.frame.test.util.TestCaseStyle;
 
@@ -107,5 +109,25 @@ public class TestCaseRunnerControl
 		String ouputdata = objectMapper.writeValueAsString(hmlist);
 		return ouputdata;
 	}
+	
+	
+	@RequestMapping("/caserunsync.do")
+    public String caserunsync() throws ClassNotFoundException, IOException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException 
+	{
+		final TestManageContorl tmcl = new TestManageContorl();
+		StatisticsResultThread thr = new StatisticsResultThread();
+		thr.start();
+        return "0";
+    }
+	
+	
+	@RequestMapping("/result.do")
+    public TestResultData result() throws ClassNotFoundException, IOException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException 
+	{
+		TestResultData trd = TestManageContorl.trdata;
+		if(trd==null)
+			trd = new TestResultData();
+        return trd;
+    }
 	
 }
