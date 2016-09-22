@@ -27,6 +27,9 @@ public class TestManageContorl
 		 {
 			 tsmanager = new TestCaseManagr();
 			 tsmanager.addTestCase("D:\\litaojun\\测试用例\\测试用例.xlsx","useradd",13);
+			 tsmanager.addTestCase("D:\\litaojun\\测试用例\\测试用例.xlsx","uselogin",6);
+			 tsmanager.addTestCase("D:\\litaojun\\测试用例\\测试用例.xlsx","userdel",4);
+			 tsmanager.addTestCase("D:\\litaojun\\测试用例\\测试用例.xlsx","contentadd",21);
 		 }
 		 if(trdata == null)
 		 {
