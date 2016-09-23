@@ -13,10 +13,15 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ExcelCommon 
 {
 	private XSSFSheet  mySheet=null;
+	private XSSFWorkbook  wb=null;
 	public ExcelCommon(String filePath,String sheetName) throws IOException
 	{
-		XSSFWorkbook  wb = new XSSFWorkbook (new FileInputStream(filePath));
+		wb = new XSSFWorkbook (new FileInputStream(filePath));
 		mySheet = wb.getSheet(sheetName);
+	}
+	public void closeExcel() throws IOException
+	{
+		this.wb.close();
 	}
 	public String readStrByRowOrCell(int row,int cell)
 	{

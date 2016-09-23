@@ -58,6 +58,7 @@ public class TestCaseManagr {
 			//System.out.println(caseList[i].toString());
 		}
 		curmap.put(weet, curList);
+		a.closeExcel();
 	}
 	public void addDataToCasehashmap(String[] tm)
 	{

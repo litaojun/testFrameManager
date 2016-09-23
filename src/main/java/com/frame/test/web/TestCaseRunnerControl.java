@@ -65,17 +65,7 @@ public class TestCaseRunnerControl
 		TestManageContorl tmcl = new TestManageContorl();
 		//MethodContext mct = tmcl.interfacemethod.get(name);
 		String ouputdata = tmcl.getTestCaseManagr().getCaseRetData(name, caseid);
-//		if(tmcl.resultmethod.containsKey(name))
-//		{
-//		MethodContext mct = tmcl.resultmethod.get(name);
-//		try {
-//			ouputdata = mct.invokeMethod(null, new String[]{ouputdata});
-//		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
-//				| InstantiationException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		}
+
 		return ouputdata;
 	}
 	
@@ -106,7 +96,8 @@ public class TestCaseRunnerControl
 		//MethodContext mct = tmcl.interfacemethod.get(name);
 		//
 		HashMap<String,List<TestCaseStyle>> hmlist = tmcl.getTestCaseManagr().getCurmap();
-		String ouputdata = objectMapper.writeValueAsString(hmlist);
+		List<TestCaseStyle> retcasels = hmlist.get(name);
+		String ouputdata = objectMapper.writeValueAsString(retcasels);
 		return ouputdata;
 	}
 	
