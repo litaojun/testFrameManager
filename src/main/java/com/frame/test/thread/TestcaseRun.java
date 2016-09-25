@@ -19,10 +19,10 @@ public class TestcaseRun extends Thread {
 	{
 		for(String[] caseid:this.datals)
 		{
-			String retstr = HttpRequest.sendGet("http://localhost:8080/interfaces",String.format("caseid=%s&intfacename=%s",caseid));
+			String retstr = HttpRequest.sendGet("http://127.0.0.1:8080/interfaces",String.format("caseid=%s&intfacename=%s",caseid));
 			TestManageContorl.getTestCaseManagr().setCaseRetData(caseid[1], caseid[0], retstr);
 			//System.out.println("retstr="+retstr);
-			String cmrresult = HttpRequest.sendGet("http://localhost:8080/resultCompare",String.format("caseid=%s&intfacename=%s",caseid));
+			String cmrresult = HttpRequest.sendGet("http://127.0.0.1:8080/resultCompare",String.format("caseid=%s&intfacename=%s",caseid));
 			TestManageContorl.getTestCaseManagr().setCaseResultData(caseid[1], caseid[0], cmrresult);
 			//System.out.println("cmrresult="+cmrresult);
 			int sign = 2;

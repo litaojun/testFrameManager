@@ -97,7 +97,7 @@ public class ClassUtils {
     
     public static void main(String[] args) throws ClassNotFoundException, IOException
     {
-    	 ArrayList<Class>  x = ClassUtils.filterClassByKey("HelloController","com");
+    	 ArrayList<Class>  x = ClassUtils.filterClassByKey("n","com.run.test.tcase.rstcpr");
     	 System.out.println("xxx="+x.size());
     	 for(Class s : x)
     		 System.out.println(s.getName());

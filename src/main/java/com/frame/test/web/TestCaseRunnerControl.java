@@ -16,6 +16,7 @@ import com.frame.test.core.MethodContext;
 import com.frame.test.core.TestManageContorl;
 import com.frame.test.thread.StatisticsResultThread;
 import com.frame.test.thread.TestResultData;
+import com.frame.test.thread.TestcaseRun;
 import com.frame.test.util.HttpRequest;
 import com.frame.test.util.TestCaseStyle;
 
@@ -23,6 +24,18 @@ import com.frame.test.util.TestCaseStyle;
 @RestController
 public class TestCaseRunnerControl 
 {
+	@RequestMapping("/caserunbyinface.do")
+	public String caserunbyinface(@RequestParam("intfacename") String name) throws ClassNotFoundException, IOException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException
+	{
+		//ObjectMapper objectMapper = new ObjectMapper();
+		TestManageContorl tl = new TestManageContorl();
+		HashMap<String,ArrayList<String[]>>  a = TestManageContorl.tsmanager.getCasehashmap();
+		ArrayList<String[]> retcasels = a.get(name);
+		 TestcaseRun tr = new TestcaseRun(retcasels);
+		tr.start();
+		//String ouputdata = objectMapper.writeValueAsString(retcasels);
+		return "0";
+	}
 
 	@RequestMapping("/caserun.do")
     public String interfaces() throws ClassNotFoundException, IOException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException 
@@ -34,10 +47,10 @@ public class TestCaseRunnerControl
 				ArrayList<String[]> als = TestManageContorl.getTestCaseManagr().getCaseidlist();
 				for(String[] caseid:als)
 				{
-					String retstr = HttpRequest.sendGet("http://localhost:8080/interfaces",String.format("caseid=%s&intfacename=%s",caseid));
+					String retstr = HttpRequest.sendGet("http://127.0.0.1:8080/interfaces",String.format("caseid=%s&intfacename=%s",caseid));
 					tmcl.getTestCaseManagr().setCaseRetData(caseid[1], caseid[0], retstr);
 					//System.out.println("retstr="+retstr);
-					String cmrresult = HttpRequest.sendGet("http://localhost:8080/resultCompare",String.format("caseid=%s&intfacename=%s",caseid));
+					String cmrresult = HttpRequest.sendGet("http://127.0.0.1:8080/resultCompare",String.format("caseid=%s&intfacename=%s",caseid));
 					tmcl.getTestCaseManagr().setCaseResultData(caseid[1], caseid[0], cmrresult);
 					//System.out.println("cmrresult="+cmrresult);
 				}
