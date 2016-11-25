@@ -18,6 +18,35 @@ public class TestCaseStyle
     	boolean rs = this.caseid.equals(mbcid);
     	return rs;
     }
+    public void setCaseid(String a) 
+    {
+    	this.caseid = a;
+    }
+    public void setFunctionPoint(String a)
+    {
+       this.functionPoint = a;
+    }
+    public void setTestPoint(String a)    
+    {
+    	this.testPoint = a;
+    }
+    public void setPreConditions(String a)
+    {
+    	this.preConditions = a;
+    }
+    public void setOpeSteps(String a) 
+    {
+    	this.opeSteps = a;
+    }
+    public void setInputData(String a) 
+    {
+    	this.inputData = a;
+    }
+
+    public void setExpectedResult(String expectrst)
+    {
+    	this.expectedResult = expectrst;
+    }
     public void setTestResult(String ret)
     {
     	this.testResult = ret;
@@ -26,19 +55,8 @@ public class TestCaseStyle
     {
     	this.retData = ret;
     }
-    public String getRetData()
-    {
-    	return this.retData;
-    }
-
-    public String getTestResult()
-    {
-    	return this.testResult;
-    }
-    public void setExpectedResult(String expectrst)
-    {
-    	this.expectedResult = expectrst;
-    }
+   
+    
     
     public TestCaseStyle(String[] a)
     {
@@ -46,7 +64,10 @@ public class TestCaseStyle
 //    	preData = new HashMap();
     	iniData(a);
     }
-    public void iniData(String[] a)
+    public TestCaseStyle() {
+		// TODO Auto-generated constructor stub
+	}
+	public void iniData(String[] a)
     {
     	this.caseid = a[0];
     	this.functionPoint  =a[1];
@@ -58,13 +79,21 @@ public class TestCaseStyle
     	
     	
     }
+	public String getCaseid()
+    {
+    	return this.caseid;
+    }
     public String getFunctionPoint()
     {
     	return this.functionPoint;
     }
-    public String getCaseid()
+    public String getTestPoint()
     {
-    	return this.caseid;
+    	return this.testPoint;
+    }
+    public String getPreConditions()
+    {
+    	return this.preConditions;
     }
     public String getOpeSteps()
     {
@@ -77,6 +106,15 @@ public class TestCaseStyle
     public String getExpectedResult()
     {
     	return this.expectedResult;
+    }
+    public String getRetData()
+    {
+    	return this.retData;
+    }
+
+    public String getTestResult()
+    {
+    	return this.testResult;
     }
 //    public String getPreData()
 //    {

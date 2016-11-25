@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +21,7 @@ import com.frame.test.thread.TestcaseRun;
 import com.frame.test.util.HttpRequest;
 import com.frame.test.util.TestCaseStyle;
 
-
+@CrossOrigin
 @RestController
 public class TestCaseRunnerControl 
 {
@@ -112,6 +113,26 @@ public class TestCaseRunnerControl
 		List<TestCaseStyle> retcasels = hmlist.get(name);
 		String ouputdata = objectMapper.writeValueAsString(retcasels);
 		return ouputdata;
+	}
+	@RequestMapping("/casedetail.do")
+	public TestCaseStyle getCasedetail(@RequestParam("intfacename") String name,@RequestParam("caseid") String caseid) throws ClassNotFoundException, IOException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException
+	{
+		TestCaseStyle tcsl = new TestCaseStyle();
+		ObjectMapper objectMapper = new ObjectMapper();
+		TestManageContorl tmcl = new TestManageContorl();
+		//MethodContext mct = tmcl.interfacemethod.get(name);
+		//
+		HashMap<String,List<TestCaseStyle>> hmlist = tmcl.getTestCaseManagr().getCurmap();
+		List<TestCaseStyle> retcasels = hmlist.get(name);
+		for(TestCaseStyle tmp:retcasels)
+		{
+			if(tmp.getCaseid().equals(caseid))
+			{
+				tcsl = tmp;
+				break;
+			}
+		}
+		return tcsl;
 	}
 	
 	
